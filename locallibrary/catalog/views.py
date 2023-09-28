@@ -17,11 +17,18 @@ def index(request):
     number_wild_genres = Genre.objects.filter(name__icontains='энтези').count()
     # Отрисовка HTML-шаблона index.html с данными внутри
     # переменной контекста context
+    num_visits=request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits+1
+
+    # Render the HTML template index.html with the data in the context variable.
     return render(
         request,
         'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors, 'number_wild_books':number_wild_books,'number_wild_genres':number_wild_genres},
+        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,
+            'num_visits':num_visits}, # num_visits appended
     )
+
+
 
 
 from django.views import generic
