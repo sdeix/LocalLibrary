@@ -31,6 +31,11 @@
                 {% else %}
                 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
                 {% endif %}
+                {% if user.is_staff %}
+                <li><a href="{% url 'borrowed' %}">Borrowed</a></li>
+                <li><a href="{% url 'book-create' %}">Добавить книгу</a></li>
+                <li><a href="{% url 'author_create' %}">Добавить автора</a></li>
+                {% endif %}
             </ul>
           {% endblock %}
           
